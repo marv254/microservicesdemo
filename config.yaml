@@ -19,6 +19,10 @@ spec:
         env:
         - name: PORT
           value: "8080"
+        - name: DISABLE_TRACING
+          value: "1"
+        - name: DISABLE_PROFILER
+          value: "1"
         livenessProbe:
           periodSeconds: 5
           exec:
@@ -27,6 +31,13 @@ spec:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
+          resources: 
+            requests:
+              memory: "64Mi"
+              cpu: 100m
+            limits:
+              memory: "128Mi"
+              cpu: 200m
 ---
 apiVersion: v1
 kind: Service
@@ -64,14 +75,7 @@ spec:
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:8080"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+
 ---
 apiVersion: v1
 kind: Service
@@ -276,7 +280,7 @@ spec:
     spec:
       containers:
       - name: service
-        image: gcr.io/google-samples/microservices-demo/adservice:v0.2.3
+        image: gcr.io/google-samples/microservices-demo/adservice:v0.3.6
         ports:
         - containerPort: 9555
         env:
@@ -368,20 +372,21 @@ spec:
         image: redis:alpine
         ports:
         - containerPort: 6379
+        livenessProbe:
+          periodSeconds: 5
+          tcpSocket:
+            port: 6379
+        readinessProbe:
+          periodSeconds: 5
+          tcpSocket:
+            port: 6379
         volumeMounts:
         - name: redis-data
           mountPath: /data
       volumes:
       - name: redis-data
         emptyDir: {}
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:6379"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:6379"]
+       
         
 ---
 apiVersion: v1
@@ -457,6 +462,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
+  repicas: 2
   selector:
     matchLabels:
       app: frontend
@@ -487,25 +493,18 @@ spec:
           value: "checkoutservice:5050"
         - name: AD_SERVICE_ADDR
           value: "adservice:9555"
-        livenessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
-        readinessProbe:
-          periodSeconds: 5
-          exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]      
+   
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: frontend
 spec:
-  type: NodePort
+  type: loadBalancer
   selector:
     app: frontend
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
     targertPort: 8080
-    NodePort: 30007
+   
