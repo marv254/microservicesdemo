@@ -23,6 +23,10 @@ spec:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
 ---
 apiVersion: v1
 kind: Service
@@ -61,6 +65,10 @@ spec:
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:8080"
         livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        readinessProbe:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]
@@ -105,7 +113,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:3550"]
 ---
 apiVersion: v1
 kind: Service
@@ -144,7 +156,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
 ---
 apiVersion: v1
 kind: Service
@@ -183,7 +199,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7000"]
 ---
 apiVersion: v1
 kind: Service
@@ -222,7 +242,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
 ---
 apiVersion: v1
 kind: Service
@@ -261,14 +285,18 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:9555"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:9555"]
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: adservice
 spec:
-  type: ClusterIP
+  type: ClusterIP 
   selector:
     app: adservice
   ports:
@@ -302,7 +330,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:7070"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:7070"]
       
 ---
 apiVersion: v1
@@ -345,7 +377,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:6379"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:6379"]
         
 ---
 apiVersion: v1
@@ -397,7 +433,11 @@ spec:
         livenessProbe:
           periodSeconds: 5
           exec:
-            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+            command: ["/bin/grpc_health_probe", "-addr=:5050"]
+        readinessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:5050"]
 ---
 apiVersion: v1
 kind: Service
@@ -448,6 +488,10 @@ spec:
         - name: AD_SERVICE_ADDR
           value: "adservice:9555"
         livenessProbe:
+          periodSeconds: 5
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:8080"]
+        readinessProbe:
           periodSeconds: 5
           exec:
             command: ["/bin/grpc_health_probe", "-addr=:8080"]      
