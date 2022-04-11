@@ -1,9 +1,11 @@
 # Microservices 
-This is a configuration to deploy a microservice online shop application, the github url for the is:
-https://github.com/GoogleCloudPlatform/microservices-demo
-execute kubectl apply -f config.yaml  to deploy the app on Kubernetes
+This is a configuration to deploy a microservice online shop application , the github url for the is: https://github.com/GoogleCloudPlatform/microservices-demo, also the image for the online application can be found on https://console.cloud.google.com/gcr/images/google-samples/global/microservices-demo/ so pick and choose the version of the image, for me am using v0.3.2
 
-#Using Helm file to Deploy microservices
+To test the deployment of the microservices  without the use of helmcharts
+
+execute _kubectl apply -f config.yaml_
+
+#**Using Helmfile to Deploy the microservices application**
 
 1.Install helmfile
 
