@@ -1,0 +1,64 @@
+releases:
+- chart: charts/redis
+  cleanupOnFail: false
+  name: rediscart
+  values:
+    - values/redis-value.yaml
+    - appReplicas: "1"
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: adservice
+  values:
+    - values/ad-service-values.yaml
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: cartservice
+  values:
+    - values/cart-service-values.yaml
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: checkoutservice
+  values:
+    - values/checkout-service-values.yaml
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: currencyservice
+  values:
+    - values/currency-service-values.yaml
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: emailservice
+  values:
+    - values/email-service-values.yaml
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: frontend
+  values:
+    - values/frontend-service-values.yaml
+    
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: paymentservice
+  values:
+    - values/payment-service-values.yaml
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: productcatalogservice
+  values:
+    - values/product-catalog-service-values.yaml
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: recommendationservice
+  values:
+    - values/recommendation-service-values.yaml
+
+- chart: charts/microservice
+  cleanupOnFail: false
+  name: shippingservice
+  values:
+    - values/shipping-service-values.yaml
