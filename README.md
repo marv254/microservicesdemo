@@ -1,5 +1,5 @@
 # Microservices 
-This is a configuration to deploy a microservice online shop application , the github url for the is: https://github.com/GoogleCloudPlatform/microservices-demo, also the image for the online application can be found on https://console.cloud.google.com/gcr/images/google-samples/global/microservices-demo/ so pick and choose the version of the image, for me am using v0.3.2
+This is a configuration to deploy a microservice online shop application , the github url for the application is: https://github.com/GoogleCloudPlatform/microservices-demo, also the images for the online application can be found on https://console.cloud.google.com/gcr/images/google-samples/global/microservices-demo/ so pick and choose the version of the image, for me am using v0.3.2
 
 To test the deployment of the microservices  without the use of helmcharts
 
