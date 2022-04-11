@@ -18,3 +18,4 @@ helmfile list
 
 4.To delete all microservices deployed
 helmfile destroy
+helmfile list
